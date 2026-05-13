@@ -130,6 +130,34 @@ class PermissionsTableSeeder extends Seeder
                 'id'    => 30,
                 'title' => 'service_card_access',
             ],
+            [
+                'id'    => 31,
+                'title' => 'car_access',
+            ],
+            [
+                'id'    => 32,
+                'title' => 'car_create',
+            ],
+            [
+                'id'    => 33,
+                'title' => 'car_edit',
+            ],
+            [
+                'id'    => 34,
+                'title' => 'car_show',
+            ],
+            [
+                'id'    => 35,
+                'title' => 'car_delete',
+            ],
+            [
+                'id'    => 36,
+                'title' => 'car_enquiry_access',
+            ],
+            [
+                'id'    => 37,
+                'title' => 'booking_enquiry_access',
+            ],
         ];
 
         Permission::insertOrIgnore($permissions);

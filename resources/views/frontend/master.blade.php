@@ -61,7 +61,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="cars.html">Cars</a>
+                            <a class="nav-link {{ request()->routeIs('frontend.cars') || request()->routeIs('frontend.cars.show') ? 'active' : '' }}" href="{{ route('frontend.cars') }}">Cars</a>
                         </li>
 
                         <li class="nav-item">
@@ -84,7 +84,7 @@
                             <span>Call Now</span>
                         </a>
 
-                        <a href="booking-enquiry.html" class="btn btn-header-gold">
+                        <a href="{{ route('frontend.booking-enquiry') }}" class="btn btn-header-gold">
                             Book Now
                             <i class="bi bi-arrow-right"></i>
                         </a>

@@ -268,7 +268,7 @@
         </div>
 
         <div class="services-cta-actions">
-          <a href="booking-enquiry.html" class="btn services-btn-primary">
+          <a href="{{ route('frontend.booking-enquiry') }}" class="btn services-btn-primary">
             Send Enquiry
             <i class="bi bi-arrow-right"></i>
           </a>

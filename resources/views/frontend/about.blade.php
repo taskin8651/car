@@ -219,7 +219,7 @@
                             availability, pricing and decoration options.
                         </p>
 
-                        <a href="booking-enquiry.html">
+                            <a href="{{ route('frontend.booking-enquiry') }}">
                             Send Booking Enquiry
                             <i class="bi bi-arrow-right"></i>
                         </a>
