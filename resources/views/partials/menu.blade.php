@@ -169,6 +169,67 @@
     </div>
 @endcan
 
+        {{-- SERVICES MANAGEMENT GROUP --}}
+@can('service_intro_access')
+    @php
+        $servicesActive = request()->is('admin/service-intros*')
+            || request()->is('admin/service-highlights*')
+            || request()->is('admin/service-cards*');
+    @endphp
+
+    <div x-data="{ open: {{ $servicesActive ? 'true' : 'false' }} }">
+
+        <button type="button"
+                @click="open = !open"
+                data-tooltip="Services"
+                class="nav-link nav-group-btn {{ $servicesActive ? 'active' : '' }}">
+
+            <div class="nav-group-left">
+                <i class="fas fa-concierge-bell nav-icon"></i>
+                <span class="nav-label">Services Management</span>
+            </div>
+
+            <i class="fas fa-chevron-right chevron"
+               :style="open ? 'transform:rotate(90deg)' : ''"></i>
+        </button>
+
+        <div class="submenu"
+             x-show="open"
+             x-transition:enter="transition ease-out duration-150"
+             x-transition:enter-start="opacity-0 -translate-y-1"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-100"
+             x-transition:leave-start="opacity-100 translate-y-0"
+             x-transition:leave-end="opacity-0 -translate-y-1">
+
+            @can('service_intro_access')
+                <a href="{{ route('admin.service-intros.index') }}"
+                   class="sub-link {{ request()->is('admin/service-intros*') ? 'active' : '' }}">
+                    <i class="fas fa-info-circle"></i>
+                    Services Intro
+                </a>
+            @endcan
+
+            @can('service_card_access')
+                <a href="{{ route('admin.service-cards.index') }}"
+                   class="sub-link {{ request()->is('admin/service-cards*') ? 'active' : '' }}">
+                    <i class="fas fa-th-large"></i>
+                    Service Cards
+                </a>
+            @endcan
+
+            @can('service_highlight_access')
+                <a href="{{ route('admin.service-highlights.index') }}"
+                   class="sub-link {{ request()->is('admin/service-highlights*') ? 'active' : '' }}">
+                    <i class="fas fa-star"></i>
+                    Service Highlight
+                </a>
+            @endcan
+
+        </div>
+    </div>
+@endcan
+
         <div class="nav-divider"></div>
 
         <p class="sidebar-section-title compact nav-label">Account</p>

@@ -1,8 +1,12 @@
 <?php
 use App\Http\Controllers\Frontend\AboutController;
+use App\Http\Controllers\Frontend\ServicesController;
 
 use App\Http\Controllers\Admin\AboutCompanyController;
 use App\Http\Controllers\Admin\AboutMissionController;
+use App\Http\Controllers\Admin\ServiceCardController;
+use App\Http\Controllers\Admin\ServiceHighlightController;
+use App\Http\Controllers\Admin\ServiceIntroController;
 
 Route::redirect('/', '/login');
 Route::get('/home', function () {
@@ -39,6 +43,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::put('about-missions', [AboutMissionController::class, 'update'])->name('about-missions.update');
     Route::resource('about-specialization-cards', AboutSpecializationCardController::class);
 
+    Route::get('service-intros', [ServiceIntroController::class, 'index'])->name('service-intros.index');
+    Route::put('service-intros', [ServiceIntroController::class, 'update'])->name('service-intros.update');
+    Route::get('service-highlights', [ServiceHighlightController::class, 'index'])->name('service-highlights.index');
+    Route::put('service-highlights', [ServiceHighlightController::class, 'update'])->name('service-highlights.update');
+    Route::resource('service-cards', ServiceCardController::class);
+
     
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
@@ -52,3 +62,4 @@ Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 
 });
 
 Route::get('/about', [AboutController::class, 'index'])->name('frontend.about');
+Route::get('/services', [ServicesController::class, 'index'])->name('frontend.services');

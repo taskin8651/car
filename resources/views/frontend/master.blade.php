@@ -19,7 +19,7 @@
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 </head>
 <body>
 
@@ -29,7 +29,7 @@
             <div class="container">
 
                 <!-- LOGO -->
-                <a class="navbar-brand brand-logo" href="index.html">
+                <a class="navbar-brand brand-logo" href="{{ url('/') }}">
                     <!-- <span class="brand-icon">
                         <i class="bi bi-car-front-fill"></i>
                     </span> -->
@@ -53,11 +53,11 @@
                 <div class="collapse navbar-collapse" id="mainNavbar">
                     <ul class="navbar-nav ms-auto align-items-lg-center header-menu">
                         <li class="nav-item">
-                            <a class="nav-link active" href="index.html">Home</a>
+                            <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="{{ url('/') }}">Home</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html">About</a>
+                            <a class="nav-link {{ request()->routeIs('frontend.about') ? 'active' : '' }}" href="{{ route('frontend.about') }}">About</a>
                         </li>
 
                         <li class="nav-item">
@@ -65,7 +65,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="services.html">Services</a>
+                            <a class="nav-link {{ request()->routeIs('frontend.services') ? 'active' : '' }}" href="{{ route('frontend.services') }}">Services</a>
                         </li>
 
                         <li class="nav-item">
@@ -236,7 +236,7 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
-    <script src="assets/js/main.js"></script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
 </body>
 </html>
 
