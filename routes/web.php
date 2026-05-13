@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\AboutSpecializationCardController;
 use App\Http\Controllers\Admin\BookingEnquiriesController;
 use App\Http\Controllers\Admin\CarEnquiriesController;
 use App\Http\Controllers\Admin\CarsController as AdminCarsController;
+use App\Http\Controllers\Admin\ContactEnquiriesController;
 use App\Http\Controllers\Admin\GalleryItemsController;
 use App\Http\Controllers\Admin\HomeHeroSlideController;
 use App\Http\Controllers\Admin\ServiceCardController;
@@ -63,6 +64,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('cars', AdminCarsController::class);
     Route::resource('car-enquiries', CarEnquiriesController::class)->only(['index', 'show', 'update', 'destroy']);
     Route::resource('booking-enquiries', BookingEnquiriesController::class)->only(['index', 'show', 'update', 'destroy']);
+    Route::resource('contact-enquiries', ContactEnquiriesController::class)->only(['index', 'show', 'update', 'destroy']);
     Route::resource('gallery-items', GalleryItemsController::class);
     Route::resource('home-hero-slides', HomeHeroSlideController::class);
     Route::resource('testimonials', TestimonialController::class);
