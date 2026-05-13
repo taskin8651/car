@@ -38,6 +38,54 @@
             <span class="nav-label">{{ trans('global.dashboard') }}</span>
         </a>
 
+        {{-- HOMEPAGE MANAGEMENT GROUP --}}
+@can('home_hero_slide_access')
+    @php
+        $homeActive = request()->is('admin/home-hero-slides*')
+            || request()->is('admin/testimonials*');
+    @endphp
+
+    <div x-data="{ open: {{ $homeActive ? 'true' : 'false' }} }">
+        <button type="button"
+                @click="open = !open"
+                data-tooltip="Homepage"
+                class="nav-link nav-group-btn {{ $homeActive ? 'active' : '' }}">
+            <div class="nav-group-left">
+                <i class="fas fa-home nav-icon"></i>
+                <span class="nav-label">Homepage Management</span>
+            </div>
+            <i class="fas fa-chevron-right chevron"
+               :style="open ? 'transform:rotate(90deg)' : ''"></i>
+        </button>
+
+        <div class="submenu"
+             x-show="open"
+             x-transition:enter="transition ease-out duration-150"
+             x-transition:enter-start="opacity-0 -translate-y-1"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-100"
+             x-transition:leave-start="opacity-100 translate-y-0"
+             x-transition:leave-end="opacity-0 -translate-y-1">
+
+            @can('home_hero_slide_access')
+                <a href="{{ route('admin.home-hero-slides.index') }}"
+                   class="sub-link {{ request()->is('admin/home-hero-slides*') ? 'active' : '' }}">
+                    <i class="fas fa-images"></i>
+                    Hero Slides
+                </a>
+            @endcan
+
+            @can('testimonial_access')
+                <a href="{{ route('admin.testimonials.index') }}"
+                   class="sub-link {{ request()->is('admin/testimonials*') ? 'active' : '' }}">
+                    <i class="fas fa-comment-dots"></i>
+                    Testimonials
+                </a>
+            @endcan
+        </div>
+    </div>
+@endcan
+
         {{-- USER MANAGEMENT GROUP --}}
         @can('user_management_access')
             @php
