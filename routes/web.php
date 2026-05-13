@@ -1,4 +1,8 @@
 <?php
+use App\Http\Controllers\Frontend\AboutController;
+
+use App\Http\Controllers\Admin\AboutCompanyController;
+use App\Http\Controllers\Admin\AboutMissionController;
 
 Route::redirect('/', '/login');
 Route::get('/home', function () {
@@ -28,6 +32,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Audit Logs
     Route::resource('audit-logs', 'AuditLogsController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
 
+ Route::get('about-companies', [AboutCompanyController::class, 'index'])->name('about-companies.index');
+    Route::put('about-companies', [AboutCompanyController::class, 'update'])->name('about-companies.update');
+
+    Route::get('about-missions', [AboutMissionController::class, 'index'])->name('about-missions.index');
+    Route::put('about-missions', [AboutMissionController::class, 'update'])->name('about-missions.update');
+    Route::resource('about-specialization-cards', AboutSpecializationCardController::class);
+
     
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
@@ -40,3 +51,4 @@ Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 
     }
 });
 
+Route::get('/about', [AboutController::class, 'index'])->name('frontend.about');
