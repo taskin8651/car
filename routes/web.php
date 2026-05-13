@@ -2,6 +2,7 @@
 use App\Http\Controllers\Frontend\AboutController;
 use App\Http\Controllers\Frontend\BookingEnquiryController;
 use App\Http\Controllers\Frontend\CarsController as FrontendCarsController;
+use App\Http\Controllers\Frontend\GalleryController;
 use App\Http\Controllers\Frontend\ServicesController;
 
 use App\Http\Controllers\Admin\AboutCompanyController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\Admin\AboutMissionController;
 use App\Http\Controllers\Admin\BookingEnquiriesController;
 use App\Http\Controllers\Admin\CarEnquiriesController;
 use App\Http\Controllers\Admin\CarsController as AdminCarsController;
+use App\Http\Controllers\Admin\GalleryItemsController;
 use App\Http\Controllers\Admin\ServiceCardController;
 use App\Http\Controllers\Admin\ServiceHighlightController;
 use App\Http\Controllers\Admin\ServiceIntroController;
@@ -56,6 +58,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('cars', AdminCarsController::class);
     Route::resource('car-enquiries', CarEnquiriesController::class)->only(['index', 'show', 'update', 'destroy']);
     Route::resource('booking-enquiries', BookingEnquiriesController::class)->only(['index', 'show', 'update', 'destroy']);
+    Route::resource('gallery-items', GalleryItemsController::class);
 
     
 });
@@ -76,3 +79,4 @@ Route::get('/cars/{car:slug}', [FrontendCarsController::class, 'show'])->name('f
 Route::post('/cars/{car:slug}/enquiry', [FrontendCarsController::class, 'storeEnquiry'])->name('frontend.cars.enquiry');
 Route::get('/booking-enquiry', [BookingEnquiryController::class, 'create'])->name('frontend.booking-enquiry');
 Route::post('/booking-enquiry', [BookingEnquiryController::class, 'store'])->name('frontend.booking-enquiry.store');
+Route::get('/gallery', [GalleryController::class, 'index'])->name('frontend.gallery');

@@ -69,7 +69,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="gallery.html">Gallery</a>
+                            <a class="nav-link {{ request()->routeIs('frontend.gallery') ? 'active' : '' }}" href="{{ route('frontend.gallery') }}">Gallery</a>
                         </li>
 
                         <li class="nav-item">
@@ -149,7 +149,7 @@
                                 <li><a href="about.html">About Us</a></li>
                                 <li><a href="cars.html">Cars</a></li>
                                 <li><a href="services.html">Services</a></li>
-                                <li><a href="gallery.html">Gallery</a></li>
+                                <li><a href="{{ route('frontend.gallery') }}">Gallery</a></li>
                             </ul>
                         </div>
                     </div>

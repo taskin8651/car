@@ -224,6 +224,16 @@
     </div>
 @endcan
 
+        {{-- GALLERY MANAGEMENT --}}
+@can('gallery_item_access')
+    <a href="{{ route('admin.gallery-items.index') }}"
+       data-tooltip="Gallery"
+       class="nav-link {{ request()->is('admin/gallery-items*') ? 'active' : '' }}">
+        <i class="fas fa-images nav-icon"></i>
+        <span class="nav-label">Gallery Management</span>
+    </a>
+@endcan
+
         {{-- SERVICES MANAGEMENT GROUP --}}
 @can('service_intro_access')
     @php

@@ -25,7 +25,7 @@
       </p>
 
       <nav class="gallery-breadcrumb-nav" aria-label="breadcrumb">
-        <a href="index.html">Home</a>
+        <a href="{{ url('/') }}">Home</a>
         <i class="bi bi-chevron-right"></i>
         <span>Gallery</span>
       </nav>
@@ -53,11 +53,9 @@
 
         <div class="gallery-filter-tabs">
           <button type="button" class="active">All Photos</button>
-          <button type="button">Wedding Entry</button>
-          <button type="button">Luxury Cars</button>
-          <button type="button">Decorated Cars</button>
-          <button type="button">Event Photos</button>
-          <button type="button">Customer Moments</button>
+          @foreach($galleryCategories as $category)
+            <button type="button">{{ $category }}</button>
+          @endforeach
         </div>
       </div>
 
@@ -86,103 +84,27 @@
 
       <div class="row g-4 gallery-row">
 
-        <!-- ITEM 1 -->
-        <div class="col-md-6 col-lg-4">
-          <a href="#" class="gallery-card" data-bs-toggle="modal" data-bs-target="#galleryModal">
-            <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=900&q=80"
-              alt="Luxury car gallery">
+        @foreach($galleryItems as $item)
+          @php
+            $columnClass = $item->card_size === 'small' ? 'col-md-6 col-lg-3' : 'col-md-6 col-lg-4';
+          @endphp
+          <div class="{{ $columnClass }}">
+            <a href="#"
+               class="gallery-card {{ $item->card_size }}"
+               data-bs-toggle="modal"
+               data-bs-target="#galleryModal"
+               data-gallery-image="{{ $item->image_src }}"
+               data-gallery-alt="{{ $item->image_alt ?? $item->title }}">
+              <img src="{{ $item->image_src }}" alt="{{ $item->image_alt ?? $item->title }}">
 
-            <div class="gallery-card-overlay">
-              <span>Luxury Cars</span>
-              <h3>Premium Wedding Fleet</h3>
-              <i class="bi bi-plus-lg"></i>
-            </div>
-          </a>
-        </div>
-
-        <!-- ITEM 2 -->
-        <div class="col-md-6 col-lg-4">
-          <a href="#" class="gallery-card tall" data-bs-toggle="modal" data-bs-target="#galleryModal">
-            <img src="https://images.unsplash.com/photo-1549927681-0b673b8243ab?auto=format&fit=crop&w=900&q=80"
-              alt="Decorated wedding car">
-
-            <div class="gallery-card-overlay">
-              <span>Decorated Cars</span>
-              <h3>Wedding Ready Car</h3>
-              <i class="bi bi-plus-lg"></i>
-            </div>
-          </a>
-        </div>
-
-        <!-- ITEM 3 -->
-        <div class="col-md-6 col-lg-4">
-          <a href="#" class="gallery-card" data-bs-toggle="modal" data-bs-target="#galleryModal">
-            <img src="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=900&q=80"
-              alt="Premium sports car">
-
-            <div class="gallery-card-overlay">
-              <span>Luxury Cars</span>
-              <h3>Premium Event Car</h3>
-              <i class="bi bi-plus-lg"></i>
-            </div>
-          </a>
-        </div>
-
-        <!-- ITEM 4 -->
-        <div class="col-md-6 col-lg-3">
-          <a href="#" class="gallery-card small" data-bs-toggle="modal" data-bs-target="#galleryModal">
-            <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=900&q=80"
-              alt="Wedding entry car">
-
-            <div class="gallery-card-overlay">
-              <span>Wedding Entry</span>
-              <h3>Royal Arrival</h3>
-              <i class="bi bi-plus-lg"></i>
-            </div>
-          </a>
-        </div>
-
-        <!-- ITEM 5 -->
-        <div class="col-md-6 col-lg-3">
-          <a href="#" class="gallery-card small" data-bs-toggle="modal" data-bs-target="#galleryModal">
-            <img src="https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?auto=format&fit=crop&w=900&q=80"
-              alt="Sports car event">
-
-            <div class="gallery-card-overlay">
-              <span>Event Photos</span>
-              <h3>Grand Entry</h3>
-              <i class="bi bi-plus-lg"></i>
-            </div>
-          </a>
-        </div>
-
-        <!-- ITEM 6 -->
-        <div class="col-md-6 col-lg-3">
-          <a href="#" class="gallery-card small" data-bs-toggle="modal" data-bs-target="#galleryModal">
-            <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=900&q=80"
-              alt="Luxury car photoshoot">
-
-            <div class="gallery-card-overlay">
-              <span>Customer Moments</span>
-              <h3>Photoshoot Moment</h3>
-              <i class="bi bi-plus-lg"></i>
-            </div>
-          </a>
-        </div>
-
-        <!-- ITEM 7 -->
-        <div class="col-md-6 col-lg-3">
-          <a href="#" class="gallery-card small" data-bs-toggle="modal" data-bs-target="#galleryModal">
-            <img src="https://images.unsplash.com/photo-1555353540-64580b51c258?auto=format&fit=crop&w=900&q=80"
-              alt="Premium car rental">
-
-            <div class="gallery-card-overlay">
-              <span>Premium Fleet</span>
-              <h3>Luxury Collection</h3>
-              <i class="bi bi-plus-lg"></i>
-            </div>
-          </a>
-        </div>
+              <div class="gallery-card-overlay">
+                <span>{{ $item->category }}</span>
+                <h3>{{ $item->title }}</h3>
+                <i class="bi bi-plus-lg"></i>
+              </div>
+            </a>
+          </div>
+        @endforeach
 
       </div>
 
@@ -260,7 +182,7 @@
         </div>
 
         <div class="gallery-cta-actions">
-          <a href="booking-enquiry.html" class="btn gallery-btn-primary">
+          <a href="{{ route('frontend.booking-enquiry') }}" class="btn gallery-btn-primary">
             Send Enquiry
             <i class="bi bi-arrow-right"></i>
           </a>
@@ -286,12 +208,24 @@
           <i class="bi bi-x-lg"></i>
         </button>
 
-        <img src="https://images.unsplash.com/photo-1549927681-0b673b8243ab?auto=format&fit=crop&w=1600&q=80"
+        <img id="galleryModalImage" src="{{ optional($galleryItems->first())->image_src ?? 'https://images.unsplash.com/photo-1549927681-0b673b8243ab?auto=format&fit=crop&w=1600&q=80' }}"
           alt="Luxury wedding car preview">
 
       </div>
     </div>
   </div>
   <!-- GALLERY MODAL END -->
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const modalImage = document.getElementById('galleryModalImage');
+      document.querySelectorAll('[data-gallery-image]').forEach(function (card) {
+        card.addEventListener('click', function () {
+          modalImage.src = card.dataset.galleryImage;
+          modalImage.alt = card.dataset.galleryAlt || 'Gallery image';
+        });
+      });
+    });
+  </script>
 
   @endsection

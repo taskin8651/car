@@ -158,6 +158,10 @@ class PermissionsTableSeeder extends Seeder
                 'id'    => 37,
                 'title' => 'booking_enquiry_access',
             ],
+            [
+                'id'    => 38,
+                'title' => 'gallery_item_access',
+            ],
         ];
 
         Permission::insertOrIgnore($permissions);
