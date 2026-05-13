@@ -360,12 +360,14 @@
         @endif
 
         {{-- Settings --}}
-        <a href="#"
-           data-tooltip="Settings"
-           class="nav-link">
-            <i class="fas fa-cog nav-icon"></i>
-            <span class="nav-label">Settings</span>
-        </a>
+        @can('website_setting_access')
+            <a href="{{ route('admin.website-settings.index') }}"
+               data-tooltip="Settings"
+               class="nav-link {{ request()->is('admin/website-settings*') ? 'active' : '' }}">
+                <i class="fas fa-cog nav-icon"></i>
+                <span class="nav-label">Website Settings</span>
+            </a>
+        @endcan
 
     </nav>
 

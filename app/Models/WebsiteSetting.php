@@ -4,14 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class WebsiteSetting extends Model
+class WebsiteSetting extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia;
 
     protected $fillable = [
         'site_name',
         'tagline',
+        'meta_title',
+        'meta_description',
+        'meta_keywords',
         'phone',
         'alternate_phone',
         'whatsapp_number',
@@ -25,13 +30,34 @@ class WebsiteSetting extends Model
         'youtube_url',
         'privacy_policy_url',
         'terms_url',
+        'logo_url',
+        'favicon_url',
     ];
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('site_logo')->singleFile();
+        $this->addMediaCollection('site_favicon')->singleFile();
+    }
+
+    public function getLogoSrcAttribute(): ?string
+    {
+        return $this->getFirstMediaUrl('site_logo') ?: $this->logo_url;
+    }
+
+    public function getFaviconSrcAttribute(): ?string
+    {
+        return $this->getFirstMediaUrl('site_favicon') ?: $this->favicon_url;
+    }
 
     public static function current(): self
     {
         return static::query()->firstOrCreate([], [
             'site_name' => 'CarBookKro',
             'tagline' => 'Luxury Wedding Cars',
+            'meta_title' => 'CarBookKro | Premium Luxury Wedding Car Rental Service',
+            'meta_description' => 'Book luxury wedding cars for groom entry, bridal entry, reception, engagement and premium events.',
+            'meta_keywords' => 'luxury wedding car rental, groom entry car, bridal entry car, premium car rental',
             'phone' => '+91 99999 99999',
             'alternate_phone' => null,
             'whatsapp_number' => '+91 99999 99999',
@@ -45,6 +71,8 @@ class WebsiteSetting extends Model
             'youtube_url' => '#',
             'privacy_policy_url' => '#',
             'terms_url' => '#',
+            'logo_url' => null,
+            'favicon_url' => null,
         ]);
     }
 }

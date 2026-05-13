@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\ServiceCardController;
 use App\Http\Controllers\Admin\ServiceHighlightController;
 use App\Http\Controllers\Admin\ServiceIntroController;
 use App\Http\Controllers\Admin\TestimonialController;
+use App\Http\Controllers\Admin\WebsiteSettingsController;
 
 Route::get('/', [HomePageController::class, 'index'])->name('frontend.home');
 Route::get('/home', function () {
@@ -65,6 +66,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('gallery-items', GalleryItemsController::class);
     Route::resource('home-hero-slides', HomeHeroSlideController::class);
     Route::resource('testimonials', TestimonialController::class);
+    Route::get('website-settings', [WebsiteSettingsController::class, 'index'])->name('website-settings.index');
+    Route::put('website-settings', [WebsiteSettingsController::class, 'update'])->name('website-settings.update');
 
     
 });

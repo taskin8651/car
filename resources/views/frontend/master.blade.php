@@ -3,9 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About CarBookKro | Premium Luxury Wedding Car Rental Service</title>
-    <meta name="description"
-        content="Book luxury wedding cars for groom entry, bridal entry, reception, engagement and premium events." />
+    <title>{{ $websiteSetting->meta_title ?? 'CarBookKro | Premium Luxury Wedding Car Rental Service' }}</title>
+    <meta name="description" content="{{ $websiteSetting->meta_description ?? 'Book luxury wedding cars for groom entry, bridal entry, reception, engagement and premium events.' }}" />
+    @if(!empty($websiteSetting?->meta_keywords))
+        <meta name="keywords" content="{{ $websiteSetting->meta_keywords }}" />
+    @endif
+    @if(!empty($websiteSetting?->favicon_src))
+        <link rel="icon" href="{{ $websiteSetting->favicon_src }}">
+        <link rel="shortcut icon" href="{{ $websiteSetting->favicon_src }}">
+    @endif
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -30,13 +36,15 @@
 
                 <!-- LOGO -->
                 <a class="navbar-brand brand-logo" href="{{ url('/') }}">
-                    <!-- <span class="brand-icon">
-                        <i class="bi bi-car-front-fill"></i>
-                    </span> -->
+                    @if(!empty($websiteSetting?->logo_src))
+                        <span class="brand-icon">
+                            <img src="{{ $websiteSetting->logo_src }}" alt="{{ $websiteSetting->site_name ?? 'CarBookKro' }}" style="height:42px;width:auto;object-fit:contain;">
+                        </span>
+                    @endif
 
                     <span class="brand-text">
-                        CarBookKro
-                        <small>Luxury Wedding Cars</small>
+                        {{ $websiteSetting->site_name ?? 'CarBookKro' }}
+                        <small>{{ $websiteSetting->tagline ?? 'Luxury Wedding Cars' }}</small>
                     </span>
                 </a>
 
