@@ -81,13 +81,13 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contact</a>
+                            <a class="nav-link {{ request()->routeIs('frontend.contact') ? 'active' : '' }}" href="{{ route('frontend.contact') }}">Contact</a>
                         </li>
                     </ul>
 
                     <!-- HEADER ACTION -->
                     <div class="header-action">
-                        <a href="tel:+919999999999" class="header-call">
+                        <a href="tel:{{ preg_replace('/\s+/', '', $websiteSetting->phone ?? '+919999999999') }}" class="header-call">
                             <i class="bi bi-telephone-fill"></i>
                             <span>Call Now</span>
                         </a>
@@ -122,14 +122,14 @@
                     <div class="col-lg-4">
                         <div class="footer-brand-area">
 
-                            <a class="footer-brand" href="index.html">
+                            <a class="footer-brand" href="{{ route('frontend.home') }}">
                                 <!-- <span class="footer-brand-icon">
                                     <i class="bi bi-car-front-fill"></i>
                                 </span> -->
 
                                 <span>
-                                    CarBookKro
-                                    <small>Luxury Wedding Cars</small>
+                                    {{ $websiteSetting->site_name ?? 'CarBookKro' }}
+                                    <small>{{ $websiteSetting->tagline ?? 'Luxury Wedding Cars' }}</small>
                                 </span>
                             </a>
 
@@ -139,10 +139,10 @@
                             </p>
 
                             <div class="social-links">
-                                <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-                                <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-                                <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
-                                <a href="#" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+                                <a href="{{ !empty($websiteSetting?->facebook_url) && $websiteSetting->facebook_url !== '#' ? $websiteSetting->facebook_url : route('frontend.home') }}" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                                <a href="{{ !empty($websiteSetting?->instagram_url) && $websiteSetting->instagram_url !== '#' ? $websiteSetting->instagram_url : route('frontend.home') }}" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                                <a href="{{ !empty($websiteSetting?->youtube_url) && $websiteSetting->youtube_url !== '#' ? $websiteSetting->youtube_url : route('frontend.home') }}" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                                <a href="{{ !empty($websiteSetting?->whatsapp_url) && $websiteSetting->whatsapp_url !== '#' ? $websiteSetting->whatsapp_url : 'https://wa.me/919999999999' }}" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
                             </div>
 
                         </div>
@@ -154,10 +154,11 @@
                             <h4>Quick Links</h4>
 
                             <ul>
-                                <li><a href="about.html">About Us</a></li>
-                                <li><a href="cars.html">Cars</a></li>
-                                <li><a href="services.html">Services</a></li>
+                                <li><a href="{{ route('frontend.about') }}">About Us</a></li>
+                                <li><a href="{{ route('frontend.cars') }}">Cars</a></li>
+                                <li><a href="{{ route('frontend.services') }}">Services</a></li>
                                 <li><a href="{{ route('frontend.gallery') }}">Gallery</a></li>
+                                <li><a href="{{ route('frontend.contact') }}">Contact</a></li>
                             </ul>
                         </div>
                     </div>
@@ -168,10 +169,10 @@
                             <h4>Services</h4>
 
                             <ul>
-                                <li><a href="#">Groom Entry Car</a></li>
-                                <li><a href="#">Bridal Entry Car</a></li>
-                                <li><a href="#">Wedding Car Rental</a></li>
-                                <li><a href="#">Pre-Wedding Shoot</a></li>
+                                <li><a href="{{ route('frontend.services') }}">Groom Entry Car</a></li>
+                                <li><a href="{{ route('frontend.services') }}">Bridal Entry Car</a></li>
+                                <li><a href="{{ route('frontend.services') }}">Wedding Car Rental</a></li>
+                                <li><a href="{{ route('frontend.services') }}">Pre-Wedding Shoot</a></li>
                             </ul>
                         </div>
                     </div>
@@ -184,22 +185,22 @@
                             <div class="footer-contact">
                                 <p>
                                     <i class="bi bi-geo-alt"></i>
-                                    <span>Your Business Address, India</span>
+                                    <span>{{ $websiteSetting->business_address ?? 'Your Business Address, India' }}</span>
                                 </p>
 
                                 <p>
                                     <i class="bi bi-telephone"></i>
-                                    <a href="tel:+919999999999">+91 99999 99999</a>
+                                    <a href="tel:{{ preg_replace('/\s+/', '', $websiteSetting->phone ?? '+919999999999') }}">{{ $websiteSetting->phone ?? '+91 99999 99999' }}</a>
                                 </p>
 
                                 <p>
                                     <i class="bi bi-envelope"></i>
-                                    <a href="mailto:info@carbookkro.com">info@carbookkro.com</a>
+                                    <a href="mailto:{{ $websiteSetting->email ?? 'info@carbookkro.com' }}">{{ $websiteSetting->email ?? 'info@carbookkro.com' }}</a>
                                 </p>
 
                                 <p>
                                     <i class="bi bi-clock"></i>
-                                    <span>Mon - Sun: 9:00 AM - 9:00 PM</span>
+                                    <span>{{ $websiteSetting->opening_hours ?? 'Mon - Sun: 9:00 AM - 9:00 PM' }}</span>
                                 </p>
                             </div>
                         </div>
@@ -208,11 +209,11 @@
                 </div>
 
                 <div class="footer-bottom">
-                    <p>© 2026 CarBookKro. All Rights Reserved.</p>
+                    <p>© {{ now()->year }} {{ $websiteSetting->site_name ?? 'CarBookKro' }}. All Rights Reserved.</p>
 
                     <div class="footer-bottom-links">
-                        <a href="#">Privacy Policy</a>
-                        <a href="#">Terms & Conditions</a>
+                        <a href="{{ !empty($websiteSetting?->privacy_policy_url) && $websiteSetting->privacy_policy_url !== '#' ? $websiteSetting->privacy_policy_url : route('frontend.home') }}">Privacy Policy</a>
+                        <a href="{{ !empty($websiteSetting?->terms_url) && $websiteSetting->terms_url !== '#' ? $websiteSetting->terms_url : route('frontend.home') }}">Terms & Conditions</a>
                     </div>
                 </div>
 
@@ -226,12 +227,12 @@
     <!-- FLOATING BUTTONS START -->
     <div class="floating-actions">
 
-        <a href="tel:+919999999999" class="float-btn call-btn" aria-label="Call Now">
+        <a href="tel:{{ preg_replace('/\s+/', '', $websiteSetting->phone ?? '+919999999999') }}" class="float-btn call-btn" aria-label="Call Now">
             <span class="float-label">Call Now</span>
             <i class="bi bi-telephone-fill"></i>
         </a>
 
-        <a href="https://wa.me/919999999999" target="_blank" class="float-btn whatsapp-btn" aria-label="WhatsApp">
+        <a href="{{ $websiteSetting->whatsapp_url ?? 'https://wa.me/919999999999' }}" target="_blank" class="float-btn whatsapp-btn" aria-label="WhatsApp">
             <span class="float-label">WhatsApp</span>
             <i class="bi bi-whatsapp"></i>
         </a>

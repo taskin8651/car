@@ -89,7 +89,7 @@
             $columnClass = $item->card_size === 'small' ? 'col-md-6 col-lg-3' : 'col-md-6 col-lg-4';
           @endphp
           <div class="{{ $columnClass }}">
-            <a href="#"
+            <a href="{{ route('frontend.gallery') }}"
                class="gallery-card {{ $item->card_size }}"
                data-bs-toggle="modal"
                data-bs-target="#galleryModal"

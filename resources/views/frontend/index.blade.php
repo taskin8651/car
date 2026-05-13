@@ -181,12 +181,12 @@
                             </div>
 
                             <div class="about-actions">
-                                <a href="about.html" class="btn btn-dark-premium">
+                                <a href="{{ route('frontend.about') }}" class="btn btn-dark-premium">
                                     Know More
                                     <i class="bi bi-arrow-right ms-1"></i>
                                 </a>
 
-                                <a href="cars.html" class="about-link">
+                                <a href="{{ route('frontend.cars') }}" class="about-link">
                                     View Premium Cars
                                     <i class="bi bi-arrow-up-right"></i>
                                 </a>
@@ -233,7 +233,7 @@
                             <span class="car-badge">Luxury Sedan</span>
 
                             <div class="car-img-overlay">
-                                <a href="car-details.html">
+                                <a href="{{ route('frontend.cars') }}">
                                     View Details
                                     <i class="bi bi-arrow-up-right"></i>
                                 </a>
@@ -261,7 +261,7 @@
                                     <span>₹9,999</span>
                                 </div>
 
-                                <a href="booking-enquiry.html" class="car-book-btn">
+                                <a href="{{ route('frontend.booking-enquiry') }}" class="car-book-btn">
                                     Book Now
                                 </a>
                             </div>
@@ -279,7 +279,7 @@
                             <span class="car-badge">Premium SUV</span>
 
                             <div class="car-img-overlay">
-                                <a href="car-details.html">
+                                <a href="{{ route('frontend.cars') }}">
                                     View Details
                                     <i class="bi bi-arrow-up-right"></i>
                                 </a>
@@ -307,7 +307,7 @@
                                     <span>On Enquiry</span>
                                 </div>
 
-                                <a href="booking-enquiry.html" class="car-book-btn">
+                                <a href="{{ route('frontend.booking-enquiry') }}" class="car-book-btn">
                                     Book Now
                                 </a>
                             </div>
@@ -325,7 +325,7 @@
                             <span class="car-badge">Sports Car</span>
 
                             <div class="car-img-overlay">
-                                <a href="car-details.html">
+                                <a href="{{ route('frontend.cars') }}">
                                     View Details
                                     <i class="bi bi-arrow-up-right"></i>
                                 </a>
@@ -353,7 +353,7 @@
                                     <span>On Enquiry</span>
                                 </div>
 
-                                <a href="booking-enquiry.html" class="car-book-btn">
+                                <a href="{{ route('frontend.booking-enquiry') }}" class="car-book-btn">
                                     Book Now
                                 </a>
                             </div>
@@ -364,7 +364,7 @@
             </div>
 
             <div class="featured-cars-action text-center">
-                <a href="cars.html" class="btn btn-gold">
+                <a href="{{ route('frontend.cars') }}" class="btn btn-gold">
                     View All Cars
                     <i class="bi bi-arrow-right ms-1"></i>
                 </a>
@@ -410,7 +410,7 @@
                             Royal luxury car entry for the groom on wedding day.
                         </p>
 
-                        <a href="services.html" class="service-link">
+                        <a href="{{ route('frontend.services') }}" class="service-link">
                             Explore
                             <i class="bi bi-arrow-up-right"></i>
                         </a>
@@ -432,7 +432,7 @@
                             Elegant decorated car service for bridal entry moments.
                         </p>
 
-                        <a href="services.html" class="service-link">
+                        <a href="{{ route('frontend.services') }}" class="service-link">
                             Explore
                             <i class="bi bi-arrow-up-right"></i>
                         </a>
@@ -454,7 +454,7 @@
                             Luxury cars for premium couple photoshoot concepts.
                         </p>
 
-                        <a href="services.html" class="service-link">
+                        <a href="{{ route('frontend.services') }}" class="service-link">
                             Explore
                             <i class="bi bi-arrow-up-right"></i>
                         </a>
@@ -476,7 +476,7 @@
                             Premium transport for guests, events and corporate use.
                         </p>
 
-                        <a href="services.html" class="service-link">
+                        <a href="{{ route('frontend.services') }}" class="service-link">
                             Explore
                             <i class="bi bi-arrow-up-right"></i>
                         </a>
@@ -616,7 +616,7 @@
                             <div class="gallery-content">
                                 <span>Luxury Cars</span>
                                 <h4>Premium Wedding Fleet</h4>
-                                <a href="gallery.html">
+                                <a href="{{ route('frontend.gallery') }}">
                                     <i class="bi bi-arrow-up-right"></i>
                                 </a>
                             </div>
@@ -634,7 +634,7 @@
                             <div class="gallery-content">
                                 <span>Wedding Entry</span>
                                 <h4>Royal Groom Arrival</h4>
-                                <a href="gallery.html">
+                                <a href="{{ route('frontend.gallery') }}">
                                     <i class="bi bi-arrow-up-right"></i>
                                 </a>
                             </div>
@@ -652,7 +652,7 @@
                             <div class="gallery-content">
                                 <span>Event Moments</span>
                                 <h4>Luxury Celebration</h4>
-                                <a href="gallery.html">
+                                <a href="{{ route('frontend.gallery') }}">
                                     <i class="bi bi-arrow-up-right"></i>
                                 </a>
                             </div>
@@ -670,7 +670,7 @@
                             <div class="gallery-content">
                                 <span>Photoshoot</span>
                                 <h4>Premium Car Shoot</h4>
-                                <a href="gallery.html">
+                                <a href="{{ route('frontend.gallery') }}">
                                     <i class="bi bi-arrow-up-right"></i>
                                 </a>
                             </div>
@@ -681,7 +681,7 @@
             </div>
 
             <div class="gallery-action text-center">
-                <a href="gallery.html" class="btn btn-gold">
+                <a href="{{ route('frontend.gallery') }}" class="btn btn-gold">
                     View Full Gallery
                     <i class="bi bi-arrow-right ms-1"></i>
                 </a>
@@ -878,7 +878,7 @@
                 </div>
 
                 <div class="cta-actions">
-                    <a href="booking-enquiry.html" class="btn cta-btn-gold">
+                    <a href="{{ route('frontend.booking-enquiry') }}" class="btn cta-btn-gold">
                         Send Enquiry
                         <i class="bi bi-arrow-right"></i>
                     </a>

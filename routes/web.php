@@ -2,6 +2,7 @@
 use App\Http\Controllers\Frontend\AboutController;
 use App\Http\Controllers\Frontend\BookingEnquiryController;
 use App\Http\Controllers\Frontend\CarsController as FrontendCarsController;
+use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\GalleryController;
 use App\Http\Controllers\Frontend\HomePageController;
 use App\Http\Controllers\Frontend\ServicesController;
@@ -91,3 +92,5 @@ Route::post('/cars/{car:slug}/enquiry', [FrontendCarsController::class, 'storeEn
 Route::get('/booking-enquiry', [BookingEnquiryController::class, 'create'])->name('frontend.booking-enquiry');
 Route::post('/booking-enquiry', [BookingEnquiryController::class, 'store'])->name('frontend.booking-enquiry.store');
 Route::get('/gallery', [GalleryController::class, 'index'])->name('frontend.gallery');
+Route::get('/contact', [ContactController::class, 'create'])->name('frontend.contact');
+Route::post('/contact', [ContactController::class, 'store'])->name('frontend.contact.store');

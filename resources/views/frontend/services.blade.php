@@ -115,7 +115,7 @@
                 <p>{{ $serviceCard->description }}</p>
               @endif
 
-              <a href="{{ $serviceCard->button_url ?: 'booking-enquiry.html' }}">
+              <a href="{{ (!$serviceCard->button_url || $serviceCard->button_url === 'booking-enquiry.html') ? route('frontend.booking-enquiry') : $serviceCard->button_url }}">
                 {{ $serviceCard->button_text ?: 'Enquire Now' }}
                 <i class="bi bi-arrow-right"></i>
               </a>

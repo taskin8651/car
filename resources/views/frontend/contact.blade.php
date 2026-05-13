@@ -25,7 +25,7 @@
       </p>
 
       <nav class="contact-breadcrumb-nav" aria-label="breadcrumb">
-        <a href="index.html">Home</a>
+        <a href="{{ route('frontend.home') }}">Home</a>
         <i class="bi bi-chevron-right"></i>
         <span>Contact</span>
       </nav>
@@ -131,73 +131,77 @@
                     </div>
 
                     <div class="col-lg-7">
-                        <form class="contact-form">
+                        @if(session('contact_enquiry_success'))
+                            <div class="alert alert-success mb-4">{{ session('contact_enquiry_success') }}</div>
+                        @endif
+
+                        <form class="contact-form" method="POST" action="{{ route('frontend.contact.store') }}">
+                            @csrf
                             <div class="row g-3">
 
                                 <div class="col-md-6">
                                     <label>Full Name</label>
-                                    <input type="text" class="form-control" placeholder="Enter your name">
+                                    <input type="text" name="full_name" value="{{ old('full_name') }}" class="form-control" placeholder="Enter your name" required>
+                                    @error('full_name')<small class="text-danger">{{ $message }}</small>@enderror
                                 </div>
 
                                 <div class="col-md-6">
                                     <label>Mobile Number</label>
-                                    <input type="tel" class="form-control" placeholder="+91 99999 99999">
+                                    <input type="tel" name="mobile_number" value="{{ old('mobile_number') }}" class="form-control" placeholder="+91 99999 99999" required>
+                                    @error('mobile_number')<small class="text-danger">{{ $message }}</small>@enderror
                                 </div>
 
                                 <div class="col-md-6">
                                     <label>Email Address</label>
-                                    <input type="email" class="form-control" placeholder="Enter email address">
+                                    <input type="email" name="email" value="{{ old('email') }}" class="form-control" placeholder="Enter email address">
+                                    @error('email')<small class="text-danger">{{ $message }}</small>@enderror
                                 </div>
 
                                 <div class="col-md-6">
                                     <label>Event Type</label>
-                                    <select class="form-select">
-                                        <option selected>Select Event Type</option>
-                                        <option>Groom Entry</option>
-                                        <option>Bridal Entry</option>
-                                        <option>Wedding Car Rental</option>
-                                        <option>Reception</option>
-                                        <option>Pre-Wedding Shoot</option>
-                                        <option>VIP Pickup & Drop</option>
+                                    <select name="event_type" class="form-select" required>
+                                        <option value="">Select Event Type</option>
+                                        @foreach(['Groom Entry', 'Bridal Entry', 'Wedding Car Rental', 'Reception', 'Pre-Wedding Shoot', 'VIP Pickup & Drop'] as $eventType)
+                                            <option value="{{ $eventType }}" {{ old('event_type') === $eventType ? 'selected' : '' }}>{{ $eventType }}</option>
+                                        @endforeach
                                     </select>
+                                    @error('event_type')<small class="text-danger">{{ $message }}</small>@enderror
                                 </div>
 
                                 <div class="col-md-6">
                                     <label>Event Date</label>
-                                    <input type="date" class="form-control">
+                                    <input type="date" name="event_date" value="{{ old('event_date') }}" class="form-control">
                                 </div>
 
                                 <div class="col-md-6">
                                     <label>Preferred Car</label>
-                                    <select class="form-select">
-                                        <option selected>Select Preferred Car</option>
-                                        <option>BMW 5 Series</option>
-                                        <option>Mercedes Benz</option>
-                                        <option>Audi A6</option>
-                                        <option>Vintage Wedding Car</option>
-                                        <option>Sports Car</option>
+                                    <select name="preferred_car" class="form-select">
+                                        <option value="">Select Preferred Car</option>
+                                        @foreach($cars as $car)
+                                            <option value="{{ $car->name }}" {{ old('preferred_car') === $car->name ? 'selected' : '' }}>{{ $car->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label>Pickup Location</label>
-                                    <input type="text" class="form-control" placeholder="Enter pickup location">
+                                    <input type="text" name="pickup_location" value="{{ old('pickup_location') }}" class="form-control" placeholder="Enter pickup location">
                                 </div>
 
                                 <div class="col-md-6">
                                     <label>Decoration Required?</label>
-                                    <select class="form-select">
-                                        <option selected>Select Option</option>
-                                        <option>Yes</option>
-                                        <option>No</option>
-                                        <option>Need Suggestions</option>
+                                    <select name="decoration_required" class="form-select">
+                                        <option value="">Select Option</option>
+                                        @foreach(['Yes', 'No', 'Need Suggestions'] as $option)
+                                            <option value="{{ $option }}" {{ old('decoration_required') === $option ? 'selected' : '' }}>{{ $option }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
                                 <div class="col-12">
                                     <label>Message / Requirement</label>
-                                    <textarea class="form-control" rows="5"
-                                        placeholder="Tell us about your event date, venue, route and special requirement"></textarea>
+                                    <textarea name="message" class="form-control" rows="5"
+                                        placeholder="Tell us about your event date, venue, route and special requirement">{{ old('message') }}</textarea>
                                 </div>
 
                                 <div class="col-12">
@@ -329,12 +333,12 @@
                 </div>
 
                 <div class="contact-cta-actions">
-                    <a href="tel:+919999999999" class="btn contact-btn-primary">
+                    <a href="tel:{{ preg_replace('/\s+/', '', $websiteSetting->phone ?? '+919999999999') }}" class="btn contact-btn-primary">
                         Call Now
                         <i class="bi bi-telephone"></i>
                     </a>
 
-                    <a href="https://wa.me/919999999999" target="_blank" class="btn contact-btn-outline">
+                    <a href="{{ $websiteSetting->whatsapp_url ?? 'https://wa.me/919999999999' }}" target="_blank" class="btn contact-btn-outline">
                         WhatsApp Now
                         <i class="bi bi-whatsapp"></i>
                     </a>
